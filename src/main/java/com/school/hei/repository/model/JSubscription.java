@@ -6,16 +6,15 @@ import com.school.hei.model.SubscriptionStatus;
 import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "subscription")
 public class JSubscription {
