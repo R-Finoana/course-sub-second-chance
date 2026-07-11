@@ -2,7 +2,6 @@ package com.school.hei.repository.model;
 
 import jakarta.persistence.*;
 import java.util.UUID;
-
 import lombok.*;
 
 @AllArgsConstructor

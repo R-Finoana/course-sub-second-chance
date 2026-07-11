@@ -6,7 +6,6 @@ import com.school.hei.model.SubscriptionStatus;
 import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
-
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
