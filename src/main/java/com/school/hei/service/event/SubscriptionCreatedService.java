@@ -25,31 +25,30 @@ public class SubscriptionCreatedService implements Consumer<SubscriptionCreated>
   @Override
   public void accept(SubscriptionCreated subscriptionCreated) {
     sendConfirmationEmailToUser(
-            subscriptionCreated.getSubscription().userId(),
-            subscriptionCreated.getSubscription().courseId()
-    );
-}
+        subscriptionCreated.getSubscription().userId(),
+        subscriptionCreated.getSubscription().courseId());
+  }
 
-  private void sendConfirmationEmailToUser(UUID userId, UUID courseId)
-          throws AddressException {
+  private void sendConfirmationEmailToUser(UUID userId, UUID courseId) throws AddressException {
     var user = userService.getById(userId);
     var course = courseService.getById(courseId);
     var to = user.email();
     var subject = "Subscription confirmation: %s".formatted(course.title());
     var htmlBody =
-            """
-            <html>
-              <body>
-                <p>Dear %s,</p>
-                <p>Your subscription has been confirmed. You now have full access to your course.</p>
-                <p>Thank you for joining us!</p>
-                <p>Best regards,</p>
-                <p>The Team</p>
-              </body>
-            </html>
-            """
-                    .formatted(user.username());
+        """
+        <html>
+          <body>
+            <p>Dear %s,</p>
+            <p>Your subscription has been confirmed. You now have full access to your course.</p>
+            <p>Thank you for joining us!</p>
+            <p>Best regards,</p>
+            <p>The Team</p>
+          </body>
+        </html>
+        """
+            .formatted(user.username());
     var email =
-            new Email(new InternetAddress(to), List.of(), List.of(), subject, htmlBody, List.of());
+        new Email(new InternetAddress(to), List.of(), List.of(), subject, htmlBody, List.of());
     mailer.accept(email);
-  }}
+  }
+}
