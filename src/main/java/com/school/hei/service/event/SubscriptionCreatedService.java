@@ -41,16 +41,19 @@ public class SubscriptionCreatedService implements Consumer<SubscriptionCreated>
 
     var htmlBody =
         """
-        <html>
-          <body>
-            <p>Dear %s,</p>
-            <p>Your subscription has been confirmed. You now have full access to your course.</p>
-            <p>Thank you for joining us!</p>
-            <p>Best regards,</p>
-            <p>The Team</p>
-          </body>
-        </html>
-        """
+<html>
+  <body>
+    <p>Dear %s,</p>
+    <p>Your subscription has been confirmed. You now have full access to your course.</p>
+    <p>Please find your subscription certificate below:</p>
+       <p><a href="%s" style="background-color: #3498db; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Download your certificate (PDF)</a></p>
+       <p><small>This link is valid for 10 minutes.</small></p>
+    <p>Thank you for joining us!</p>
+    <p>Best regards,</p>
+    <p>The Team</p>
+  </body>
+</html>
+"""
             .formatted(user.username(), pdfUrl);
     var email =
         new Email(new InternetAddress(to), List.of(), List.of(), subject, htmlBody, List.of());
