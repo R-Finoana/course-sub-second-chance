@@ -4,6 +4,7 @@ import com.school.hei.endpoint.event.model.SubscriptionCreated;
 import com.school.hei.mail.Email;
 import com.school.hei.mail.Mailer;
 import com.school.hei.service.CourseService;
+import com.school.hei.service.SubscriptionService;
 import com.school.hei.service.UserService;
 import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
@@ -20,6 +21,7 @@ public class SubscriptionCreatedService implements Consumer<SubscriptionCreated>
   private final Mailer mailer;
   private final UserService userService;
   private final CourseService courseService;
+  private final SubscriptionService subscriptionService;
 
   @SneakyThrows
   @Override
@@ -34,6 +36,9 @@ public class SubscriptionCreatedService implements Consumer<SubscriptionCreated>
     var course = courseService.getById(courseId);
     var to = user.email();
     var subject = "Subscription confirmation: %s".formatted(course.title());
+
+    String pdfUrl = subscriptionService.uploadSubscriptionPdf(userId, courseId);
+
     var htmlBody =
         """
         <html>
@@ -46,7 +51,7 @@ public class SubscriptionCreatedService implements Consumer<SubscriptionCreated>
           </body>
         </html>
         """
-            .formatted(user.username());
+            .formatted(user.username(), pdfUrl);
     var email =
         new Email(new InternetAddress(to), List.of(), List.of(), subject, htmlBody, List.of());
     mailer.accept(email);
