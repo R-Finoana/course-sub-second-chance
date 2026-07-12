@@ -2,15 +2,13 @@ package com.school.hei.repository.model;
 
 import jakarta.persistence.*;
 import java.util.UUID;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "\"user\"")
 public class JUser {
