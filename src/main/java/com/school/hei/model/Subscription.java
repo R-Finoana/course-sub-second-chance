@@ -1,9 +1,8 @@
 package com.school.hei.model;
 
-import lombok.Builder;
-
 import java.time.Instant;
 import java.util.UUID;
+import lombok.Builder;
 
 @Builder
 public record Subscription(

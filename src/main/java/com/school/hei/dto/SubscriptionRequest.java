@@ -1,9 +1,7 @@
 package com.school.hei.dto;
 
+import java.util.UUID;
 import lombok.Builder;
 
-import java.util.UUID;
-
 @Builder
-public record SubscriptionRequest(UUID userId) {
-}
+public record SubscriptionRequest(UUID userId) {}
